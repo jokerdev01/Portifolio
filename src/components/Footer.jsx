@@ -1,6 +1,13 @@
 "use client";
 
+import { useContext } from "react";
+import { LanguageContext } from "../context/LanguageContext";
+import { translations } from "../translations/translations";
+
 function Footer() {
+  const { language } = useContext(LanguageContext);
+  const t = translations[language];
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -22,38 +29,38 @@ function Footer() {
               Lucas<span className="text-cyan-400">.dev</span>
             </h3>
             <p className="text-gray-400 text-sm max-w-sm leading-relaxed">
-              Desenvolvedor focado em criar aplicações completas, desde interfaces modernas e intuitivas até microsserviços e integrações eficientes.
+              {t.footer.description}
             </p>
             <div className="flex items-center gap-2 text-xs text-emerald-400 mt-2">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              Disponível para novos projetos e oportunidades
+              {t.footer.available}
             </div>
           </div>
 
           {/* Navegação */}
           <div className="flex flex-col gap-3 text-left">
             <h4 className="text-white text-sm font-semibold tracking-wider uppercase">
-              Navegação
+              {t.footer.navigation}
             </h4>
             <ul className="flex flex-col gap-2 text-sm text-gray-400">
               <li>
                 <a href="#home" className="hover:text-cyan-400 transition-colors">
-                  Início
+                  {t.nav.home}
                 </a>
               </li>
               <li>
                 <a href="#sobremim" className="hover:text-cyan-400 transition-colors">
-                  Sobre mim
+                  {t.nav.about}
                 </a>
               </li>
               <li>
                 <a href="#competencias" className="hover:text-cyan-400 transition-colors">
-                  Competências
+                  {t.nav.skills}
                 </a>
               </li>
               <li>
                 <a href="#projetos" className="hover:text-cyan-400 transition-colors">
-                  Projetos
+                  {t.nav.projects}
                 </a>
               </li>
             </ul>
@@ -62,7 +69,7 @@ function Footer() {
           {/* Redes */}
           <div className="flex flex-col gap-3 text-left">
             <h4 className="text-white text-sm font-semibold tracking-wider uppercase">
-              Redes Sociais
+              {t.footer.social}
             </h4>
             <div className="flex flex-col gap-2.5 text-sm text-gray-400">
               <a
@@ -117,14 +124,14 @@ function Footer() {
 
         {/* Rodapé Final */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-          <p>© {new Date().getFullYear()} Lucas. Todos os direitos reservados.</p>
+          <p>© {new Date().getFullYear()} Lucas. {t.footer.rights}</p>
 
           <button
             type="button"
             onClick={scrollToTop}
             className="flex items-center gap-2 text-gray-400 hover:text-cyan-400 transition-colors py-1 px-3 rounded-lg border border-gray-800 hover:border-cyan-500/40 bg-[#020721]"
           >
-            <span>Voltar ao topo</span>
+            <span>{t.footer.top}</span>
             <svg
               className="w-3.5 h-3.5"
               fill="none"

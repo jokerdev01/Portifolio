@@ -1,11 +1,18 @@
+import { useContext } from "react";
+import { LanguageContext } from "../context/LanguageContext";
+import { translations } from "../translations/translations";
+
 function Competencies() {
+  const { language } = useContext(LanguageContext);
+  const t = translations[language];
+
   const cards = [
     {
       id: "01 -",
       title: "FRONT - END",
       borderColor: "border-l-blue-500",
       textColor: "text-blue-500",
-      description: "Criação de interfaces modeernas, responsivas e intuitivas, com foco na experiencia do usuario",
+      description: t.competencies.cards[0].description,
       mainIcon: "/icons/Front.png",
       techs: [
         { name: "CSS", icon: "../../public/icons/CSS.png" },
@@ -20,7 +27,7 @@ function Competencies() {
       title: "BACK - END",
       borderColor: "border-l-green-500",
       textColor: "text-green-500",
-      description: "Desenvolvimento de aplicações, APIs e logica de negocio, seguindo boas praticas e arquitetura escalável.",
+      description: t.competencies.cards[1].description,
       mainIcon: "../../public/icons/Back.png",
       techs: [
         { name: "Node.js", icon: "../../public/icons/Node.png" },
@@ -35,7 +42,7 @@ function Competencies() {
       title: "DATABASE",
       borderColor: "border-l-purple-600",
       textColor: "text-purple-600",
-      description: "Criação de interfaces modeernas, responsivas e intuitivas, com foco na experiencia do usuario",
+      description: t.competencies.cards[2].description,
       mainIcon: "../../public/icons/BD.png",
       techs: [
         { name: "MySQL", icon: "../../public/icons/MySQL.png" },
@@ -48,7 +55,7 @@ function Competencies() {
       title: "Cloud",
       borderColor: "border-l-amber-500",
       textColor: "text-amber-500",
-      description: "Criação de interfaces modeernas, responsivas e intuitivas, com foco na experiencia do usuario",
+      description: t.competencies.cards[3].description,
       mainIcon: "../../public/icons/Aws.png",
       techs: [
         { name: "LAMBDA", icon: "../../public/icons/Lambda.png" },
@@ -61,7 +68,7 @@ function Competencies() {
       title: "UX / UI",
       borderColor: "border-l-fuchsia-600",
       textColor: "text-fuchsia-600",
-      description: "Criação de interfaces modeernas, responsivas e intuitivas, com foco na experiencia do usuario",
+      description: t.competencies.cards[4].description,
       mainIcon: "../../public/icons/design-ux.png",
       techs: [
         { name: "CSS", icon: "/icons/figma.png" },
@@ -75,7 +82,7 @@ function Competencies() {
     <section id="competencias" className="bg-[#01031F] text-white py-20 px-6 min-h-screen">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold mb-12 text-left">
-          Competências
+          {t.competencies.title}
         </h2>
 
         {/* Linha 1 (3 cartões) e Linha 2 (2 cartões centralizados) */}

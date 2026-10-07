@@ -1,8 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { LanguageContext } from "../context/LanguageContext";
+import { translations } from "../translations/translations";
 
 function Projects() {
+  const { language } = useContext(LanguageContext);
+  const t = translations[language];
   const [activeProject, setActiveProject] = useState(null);
 
   const projects = [
@@ -10,8 +14,9 @@ function Projects() {
       id: 1,
       title: "iPhone Clone",
       category: "Full Stack",
-      description:
-        "Interface moderna e responsiva simulando o ecossistema iOS com animações e navegação interativa.",
+      description: language === "pt"
+        ? "Interface moderna e responsiva simulando o ecossistema iOS com animações e navegação interativa."
+        : "Modern, responsive interface simulating the iOS ecosystem with animations and interactive navigation.",
       image: "",
       tags: ["React", "Vite", "Tailwind"],
       githubUrl: "https://github.com/jokerdev01/Iphone",
@@ -20,12 +25,12 @@ function Projects() {
   ];
 
   return (
-    <section className="bg-[#020517] text-white py-20 px-6 min-h-screen">
+    <section id="projetos" className="bg-[#020517] text-white py-20 px-6 min-h-screen">
       <div className="max-w-7xl mx-auto">
         <div className="mb-12 text-left">
-          <h2 className="text-5xl md:text-6xl font-bold mb-4 tracking-tight">Projetos</h2>
+          <h2 className="text-5xl md:text-6xl font-bold mb-4 tracking-tight">{t.projects.title}</h2>
           <p className="text-gray-400 text-sm md:text-base max-w-2xl leading-relaxed">
-            Clica no ícone para interagir diretamente com a aplicação.
+            {t.projects.description}
           </p>
         </div>
 
@@ -80,7 +85,7 @@ function Projects() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="cursor-pointer text-gray-300 hover:text-white transition-colors"
-                      title="Ver no GitHub"
+                      title={t.projects.github}
                       onClick={(e) => e.stopPropagation()}
                     >
                       <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
@@ -95,7 +100,7 @@ function Projects() {
                         setActiveProject(proj);
                       }}
                       className="cursor-pointer text-cyan-400 hover:text-cyan-300 hover:scale-110 transition-all p-1"
-                      title="Abrir Projeto"
+                      title={t.projects.open}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -148,7 +153,7 @@ function Projects() {
                   rel="noopener noreferrer"
                   className="text-xs text-blue-400 hover:text-blue-300 underline underline-offset-2"
                 >
-                  Abrir no navegador ↗
+                  {t.projects.openInBrowser} ↗
                 </a>
 
                 <button
@@ -156,7 +161,7 @@ function Projects() {
                   onClick={() => setActiveProject(null)}
                   className="text-red-400 hover:text-white bg-red-950/40 hover:bg-red-700/80 border border-red-800/60 px-3 py-1 rounded-lg text-sm transition"
                 >
-                  ✕ Fechar
+                  ✕ {t.projects.close}
                 </button>
               </div>
             </div>

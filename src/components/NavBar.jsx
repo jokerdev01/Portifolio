@@ -24,7 +24,7 @@ function NavBar() {
         </div>
 
         <button onClick={toggleLanguage} className="absolute right-6 p-2 rounded-full hover:bg-gray-200 transition "
-          title="Traduzir">
+          title={t.nav.translate}>
           <Languages size={24} />
         </button>
 
