@@ -1,8 +1,8 @@
-import NavBar from './compenents/Navbar'
-import Hero from './compenents/Hero'
-import Intro from './compenents/Intro'
-import Competencies from './compenents/Competencies'
-import Projects from './compenents/Projetcs';
+import NavBar from './components/Navbar'
+import Hero from './components/Hero'
+import Intro from './components/Intro'
+import Competencies from './components/Competencies'
+import Projects from './components/Projetcs';
 import Footer from './components/Footer';
 
 function App() {
