@@ -16,7 +16,7 @@ function Projects() {
     tags: ["React", "Vite", "Tailwind"],
     githubUrl: "https://github.com/seu-usuario/iphone-clone",
     // Substitua a porta local pela URL pública:
-    liveUrl: "https://iphone-ten-eta.vercel.app/", 
+    liveUrl: "https://iphone-ten-eta.vercel.app", 
   },
 ];
 
