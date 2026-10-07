@@ -4,64 +4,28 @@ import { useState } from "react";
 
 function Projects() {
   const [activeProject, setActiveProject] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   const projects = [
-  {
-    id: 1,
-    title: "iPhone Clone",
-    category: "Full Stack",
-    description: "Interface e animações interativas simulando o ecossistema iOS.",
-    image: "",
-    tags: ["React", "Vite", "Tailwind"],
-    githubUrl: "https://github.com/seu-usuario/iphone-clone",
-    // Substitua a porta local pela URL pública:
-    liveUrl: "https://iphone-ten-eta.vercel.app", 
-  },
-];
-
-  // Iniciar projeto
-  const handleStartAndOpenProject = async (proj) => {
-    setLoading(true);
-    setActiveProject(proj);
-
-    try {
-      await fetch(`http://localhost:3001/start-project/${proj.id}`, {
-        method: "POST",
-      });
-
-      // Aguarda 3.5 segundos para compilação do Vite
-      setTimeout(() => {
-        setLoading(false);
-      }, 3500);
-    } catch {
-      console.warn("Servidor executor inacessível, abrindo porta direta.");
-      setLoading(false);
-    }
-  };
-
-  // Parar projeto e fechar modal
-  const handleCloseAndStopProject = async () => {
-    if (activeProject) {
-      try {
-        await fetch(`http://localhost:3001/stop-project/${activeProject.id}`, {
-          method: "POST",
-        });
-      } catch {
-        console.warn("Não foi possível solicitar o encerramento do processo.");
-      }
-    }
-    setActiveProject(null);
-    setLoading(false);
-  };
+    {
+      id: 1,
+      title: "iPhone Clone",
+      category: "Full Stack",
+      description:
+        "Interface moderna e responsiva simulando o ecossistema iOS com animações e navegação interativa.",
+      image: "",
+      tags: ["React", "Vite", "Tailwind"],
+      githubUrl: "https://github.com/jokerdev01/Iphone",
+      liveUrl: "https://iphone-ten-eta.vercel.app",
+    },
+  ];
 
   return (
-    <section id="projetos" className="bg-[#01031F] text-white py-20 px-6 min-h-screen">
+    <section className="bg-[#020517] text-white py-20 px-6 min-h-screen">
       <div className="max-w-7xl mx-auto">
         <div className="mb-12 text-left">
           <h2 className="text-5xl md:text-6xl font-bold mb-4 tracking-tight">Projetos</h2>
           <p className="text-gray-400 text-sm md:text-base max-w-2xl leading-relaxed">
-            Clique no ícone para compilar e iniciar o projeto diretamente em tempo real.
+            Clica no ícone para interagir diretamente com a aplicação.
           </p>
         </div>
 
@@ -71,11 +35,20 @@ function Projects() {
             <div
               key={proj.id}
               className="bg-[#020721] border border-gray-800 rounded-3xl overflow-hidden flex flex-col justify-between cursor-pointer hover:scale-105 hover:border-blue-600/60 transition-all duration-300 shadow-lg"
+              onClick={() => setActiveProject(proj)}
             >
               <div className="w-full h-56 bg-[#1f2024] flex items-center justify-center overflow-hidden">
-                <span className="text-gray-200 text-4xl font-extrabold tracking-widest select-none">
-                  IMG
-                </span>
+                {proj.image ? (
+                  <img
+                    src={proj.image}
+                    alt={proj.title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className="text-gray-200 text-4xl font-extrabold tracking-widest select-none">
+                    IMG
+                  </span>
+                )}
               </div>
 
               <div className="p-6 flex flex-col flex-1 justify-between gap-6">
@@ -84,7 +57,9 @@ function Projects() {
                     {proj.category}
                   </span>
                   <h3 className="text-xl font-bold text-white tracking-wide">{proj.title}</h3>
-                  <p className="text-gray-400 text-xs leading-relaxed line-clamp-3">{proj.description}</p>
+                  <p className="text-gray-400 text-xs leading-relaxed line-clamp-3">
+                    {proj.description}
+                  </p>
                 </div>
 
                 <div className="flex items-center justify-between pt-2 border-t border-gray-800/40">
@@ -105,6 +80,7 @@ function Projects() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="cursor-pointer text-gray-300 hover:text-white transition-colors"
+                      title="Ver no GitHub"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
@@ -116,10 +92,10 @@ function Projects() {
                       type="button"
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleStartAndOpenProject(proj);
+                        setActiveProject(proj);
                       }}
                       className="cursor-pointer text-cyan-400 hover:text-cyan-300 hover:scale-110 transition-all p-1"
-                      title="Ativar e Rodar Projeto"
+                      title="Abrir Projeto"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -144,11 +120,11 @@ function Projects() {
         </div>
       </div>
 
-      {/* Modal com controlo de encerramento */}
+      {/* Modal Iframe */}
       {activeProject && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
-          onClick={handleCloseAndStopProject}
+          onClick={() => setActiveProject(null)}
         >
           <div
             className="bg-[#020721] border border-gray-700 w-full max-w-6xl h-[88vh] rounded-2xl flex flex-col overflow-hidden shadow-2xl"
@@ -156,18 +132,18 @@ function Projects() {
           >
             <div className="flex items-center justify-between px-6 py-3.5 border-b border-gray-800 bg-[#040b2e]">
               <div className="flex items-center gap-3">
-                <span className={`w-3 h-3 rounded-full ${loading ? "bg-amber-400 animate-pulse" : "bg-emerald-500"}`}></span>
+                <span className="w-3 h-3 rounded-full bg-emerald-500"></span>
                 <span className="text-xs bg-[#0b1540] text-gray-300 px-3 py-1 rounded-full border border-gray-700 font-mono">
-                  {activeProject.localUrl}
+                  {activeProject.liveUrl}
                 </span>
                 <h4 className="font-semibold text-white text-sm hidden sm:inline">
-                  {loading ? "A compilar servidor local..." : activeProject.title}
+                  {activeProject.title}
                 </h4>
               </div>
 
               <div className="flex items-center gap-3">
                 <a
-                  href={activeProject.localUrl}
+                  href={activeProject.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs text-blue-400 hover:text-blue-300 underline underline-offset-2"
@@ -175,32 +151,23 @@ function Projects() {
                   Abrir no navegador ↗
                 </a>
 
-                {/* Botão de Fechar e Desligar o Terminal */}
                 <button
                   type="button"
-                  onClick={handleCloseAndStopProject}
+                  onClick={() => setActiveProject(null)}
                   className="text-red-400 hover:text-white bg-red-950/40 hover:bg-red-700/80 border border-red-800/60 px-3 py-1 rounded-lg text-sm transition"
-                  title="Parar servidor e fechar modal"
                 >
-                  ✕ Parar & Fechar
+                  ✕ Fechar
                 </button>
               </div>
             </div>
 
-            <div className="flex-1 bg-white relative flex items-center justify-center">
-              {loading ? (
-                <div className="flex flex-col items-center gap-3 text-gray-800">
-                  <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-                  <p className="text-sm font-semibold">A iniciar o ambiente do projeto no Windows...</p>
-                </div>
-              ) : (
-                <iframe
-                  src={activeProject.localUrl}
-                  title={activeProject.title}
-                  className="w-full h-full border-0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                />
-              )}
+            <div className="flex-1 bg-black relative flex items-center justify-center">
+              <iframe
+                src={activeProject.liveUrl}
+                title={activeProject.title}
+                className="w-full h-full border-0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              />
             </div>
           </div>
         </div>
