@@ -12,7 +12,7 @@ function Projects() {
     title: "iPhone Clone",
     category: "Full Stack",
     description: "Interface e animações interativas simulando o ecossistema iOS.",
-    image: "",gi
+    image: "",
     tags: ["React", "Vite", "Tailwind"],
     githubUrl: "https://github.com/seu-usuario/iphone-clone",
     // Substitua a porta local pela URL pública:
